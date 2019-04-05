@@ -1,4 +1,4 @@
-# sweco-app
+# vue-bootstrap-custom
 
 ## Project setup
 ```
