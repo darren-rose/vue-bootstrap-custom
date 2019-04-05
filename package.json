@@ -8,7 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.16",
     "core-js": "^2.6.5",
+    "sweco-bootstrap": "github:sweco/sweco-digital-platforms",
     "vue": "^2.6.6"
   },
   "devDependencies": {
