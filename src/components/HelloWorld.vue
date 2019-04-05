@@ -7,64 +7,87 @@
     <button type="button" class="btn btn-primary">Primary</button>
     <button type="button" class="btn btn-secondary">Secondary</button>
 
-  <div>
-    <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
-      <b-dropdown-item>First Action</b-dropdown-item>
-      <b-dropdown-item>Second Action</b-dropdown-item>
-      <b-dropdown-item>Third Action</b-dropdown-item>
-      <b-dropdown-divider></b-dropdown-divider>
-      <b-dropdown-item active>Active action</b-dropdown-item>
-      <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-    </b-dropdown>
-  </div>
-
-  <div>
-    <b-button @click="toggle" size="sm">
-      {{ show ? 'Hide' : 'Show' }} Alert
-    </b-button>
-    <b-alert v-model="show"
-            dismissible
-            @dismissed="dismissed"
-            class="mt-3">
-      Hello {{ name }}!
-    </b-alert>
-  </div>
-
-  <div class="container mt-3">
-
-    <h2>Carousel</h2>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-      <!-- Indicators -->
-      <ul class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ul>
-      
-      <!-- The slideshow -->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="https://cdn2.lamag.com/wp-content/uploads/sites/6/2017/01/LABridgeShutterstock2.jpg" alt="Los Angeles" width="1100" height="500">
-        </div>
-        <div class="carousel-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chicago_from_North_Avenue_Beach_June_2015_panorama_2.jpg/1340px-Chicago_from_North_Avenue_Beach_June_2015_panorama_2.jpg" alt="Chicago" width="1100" height="500">
-        </div>
-        <div class="carousel-item">
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg" alt="New York" width="1100" height="500">
-        </div>
-      </div>
-      
-      <!-- Left and right controls -->
-      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
+    <div>
+      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+        <b-dropdown-item>First Action</b-dropdown-item>
+        <b-dropdown-item>Second Action</b-dropdown-item>
+        <b-dropdown-item>Third Action</b-dropdown-item>
+        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-item active>Active action</b-dropdown-item>
+        <b-dropdown-item disabled>Disabled action</b-dropdown-item>
+      </b-dropdown>
     </div>
 
-  </div>
+    <div>
+      <b-button @click="toggle" size="sm">
+        {{ show ? 'Hide' : 'Show' }} Alert
+      </b-button>
+      <b-alert v-model="show"
+              dismissible
+              @dismissed="dismissed"
+              class="mt-3">
+        Hello {{ name }}!
+      </b-alert>
+    </div>
+
+    <div>
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        controls
+        indicators
+        background="#ababab"
+        img-width="1024"
+        img-height="480"
+        style="text-shadow: 1px 1px 2px #333;"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <!-- Text slides with image -->
+        <b-carousel-slide
+          caption="First slide"
+          text="Nulla vitae elit libero, a pharetra augue mollis interdum."
+          img-src="https://picsum.photos/1024/480/?image=52"
+        ></b-carousel-slide>
+
+        <!-- Slides with custom text -->
+        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+          <h1>Hello world!</h1>
+        </b-carousel-slide>
+
+        <!-- Slides with image only -->
+        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+
+        <!-- Slides with img slot -->
+        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+        <b-carousel-slide>
+          <img
+            slot="img"
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="https://picsum.photos/1024/480/?image=55"
+            alt="image slot"
+          >
+        </b-carousel-slide>
+
+        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+        <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
+            a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
+          </p>
+        </b-carousel-slide>
+      </b-carousel>
+
+      <p class="mt-4">
+        Slide #: {{ slide }}<br>
+        Sliding: {{ sliding }}
+      </p>
+    </div>
+
+
 
   </div>
 </template>
@@ -78,17 +101,23 @@ export default {
   data () {
     return {
       name: 'BootstrapVue',
-      show: true
+      show: true,
+      slide: 0,
+      sliding: null
     }
   },  
   methods: {
     toggle () {
-      console.log('Toggle button clicked')
       this.show = !this.show
     },
     dismissed () {
-      console.log('Dismiss button clicked')
-    }
+    },
+    onSlideStart() {
+      this.sliding = true
+    },
+    onSlideEnd() {
+      this.sliding = false
+    }    
   }  
 }
 </script>
