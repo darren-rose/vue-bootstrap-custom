@@ -25,7 +25,7 @@ npm run test
 npm run lint
 ```
 
-## Addining dependencies
+## Adding a new dependency
 ```
 npm install <insert-dependency> --save
 ```
