@@ -25,5 +25,10 @@ npm run test
 npm run lint
 ```
 
+## Addining dependencies
+```
+npm install <insert-dependency> --save
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
