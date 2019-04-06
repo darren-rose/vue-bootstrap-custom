@@ -27,7 +27,7 @@ npm run lint
 
 ## Adding a new dependency
 ```
-npm install <insert-dependency> --save
+npm install jquery@3.0.0 --save
 ```
 
 ### Customize configuration
